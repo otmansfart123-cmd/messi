@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Messi vs Buffon ⚽</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #c8e6c9;
+    }
+
+    #game {
+      width: 400px;
+      height: 250px;
+      margin: auto;
+      border: 3px solid black;
+      position: relative;
+      background: url('https://i.imgur.com/7vZ9F8b.png');
+      background-size: cover;
+    }
+
+    #ball {
+      width: 30px;
+      height: 30px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 10px;
+      left: 180px;
+    }
+
+    #keeper {
+      width: 80px;
+      height: 20px;
+      background: red;
+      position: absolute;
+      top: 10px;
+      left: 160px;
+    }
+
+    #comment {
+      font-size: 20px;
+      margin: 10px;
+      color: blue;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>⚽ Messi vs Buffon ⚽</h1>
+<p id="comment">🎙️ Messi is ready to shoot...</p>
+
+<div id="game">
+  <div id="keeper"></div>
+  <div id="ball"></div>
+</div>
+
+<button onclick="shoot()">Shoot ⚽</button>
+
+<script>
+let ball = document.getElementById("ball");
+let keeper = document.getElementById("keeper");
+let comment = document.getElementById("comment");
+
+// تحريك الحارس
+setInterval(() => {
+  keeper.style.left = Math.random() * 320 + "px";
+}, 700);
+
+function shoot() {
+  comment.innerText = "🎙️ Messi shoots!!!";
+
+  let pos = 10;
+
+  let interval = setInterval(() => {
+    pos += 5;
+    ball.style.bottom = pos + "px";
+
+    if (pos >= 200) {
+      clearInterval(interval);
+
+      let ballX = ball.offsetLeft;
+      let keeperX = keeper.offsetLeft;
+
+      if (ballX > keeperX && ballX < keeperX + 80) {
+        comment.innerText = "🧤 Buffon saves it!!!";
+      } else {
+        comment.innerText = "⚽ GOOOOAL!!!";
+
+        // دخول لموقع جديد
+        setTimeout(() => {
+          window.location.href = "https://www.fifa.com";
+        }, 1500);
+      }
+
+      ball.style.bottom = "10px";
+    }
+  }, 20);
+}
+</script>
+
+</body>
+</html>
